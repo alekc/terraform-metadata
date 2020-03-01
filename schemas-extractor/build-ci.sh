@@ -161,9 +161,7 @@ if [[ -z "${SKIP_UPDATE:-}" ]]; then
     update_or_clone "$p"
     process_repository "$p" || true
     rm -rf "$GOPATH/src/github.com/terraform-providers/$name"
-#    rm -rf /go/pkg/mod/*
     go clean --modcache
     df -h
-    exit 0
   done < <(grep '^terraform-provider-' <"${CUR}/providers.list.full")
 fi
