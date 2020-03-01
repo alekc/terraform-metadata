@@ -164,5 +164,6 @@ if [[ -z "${SKIP_UPDATE:-}" ]]; then
 #    rm -rf /go/pkg/mod/*
     go clean --modcache
     df -h
+    exit 0
   done < <(grep '^terraform-provider-' <"${CUR}/providers.list.full")
 fi
