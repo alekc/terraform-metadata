@@ -7,7 +7,7 @@ on:
 jobs:
 
   sync:
-    name: Build
+    name: Sync repositories
     runs-on: ubuntu-latest
     steps:
 
@@ -51,7 +51,7 @@ jobs:
 
       - name: Move around
         run: |
-          sudo apt-update
+          sudo apt update
           sudo apt install tree
           git status
           tree
