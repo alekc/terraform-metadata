@@ -51,6 +51,10 @@ jobs:
 
       - name: Move around
         run: |
+          sudo apt-update
+          sudo apt install tree
+          git status
+          tree
           mv latest-sync/* terraform/
           git status
 
