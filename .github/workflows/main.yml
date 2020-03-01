@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: master
+    branches: debug
 
 jobs:
 
@@ -49,13 +49,12 @@ jobs:
         with:
           name: latest-sync
 
-      - name: Move around
+      - name: Apply latest artifact
         run: |
           sudo apt update
-          sudo apt install tree
           git status
-          tree
-          mv latest-sync/* terraform/
+          rsync -a latest-sync/ terraform/
+          rm -rf latest-sync
           git status
 
       - name: Set commit message
@@ -70,6 +69,12 @@ jobs:
           commit_user_name: Alexander Chernov
           commit_user_email: alekcander@gmail.com
 
+      - name: Merge sync changes to master
+        run: |
+          git status
+          git checkout debug
+          git cherry-pick sync
+          git push
 #      - name: Git Status
 #        id: debug
 #        run: |
